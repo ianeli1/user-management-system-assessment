@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: $valid_url");
 header("Access-Control-Allow-Methods: GET,POST");
 
 function getDotEnv() {
-    $file = fopen(realpath("../.env"), "r");
+    $file = fopen(realpath(".env"), "r");
     while ($val = fgets($file)) {
         putenv(trim($val));
     }
