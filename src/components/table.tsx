@@ -9,9 +9,10 @@ import { formRequest } from "../utils";
 
 interface UserTableProps {
   onEdit: (user: User) => void;
+  onLoad: (numberOfEntries: number) => void;
 }
 
-export function UserTable({ onEdit }: UserTableProps) {
+export function UserTable({ onEdit, onLoad }: UserTableProps) {
   function dateToAge(date: string) {
     const currentTime = new Date();
     const thenTime = new Date(date);
@@ -70,7 +71,9 @@ export function UserTable({ onEdit }: UserTableProps) {
     () =>
       void (async () => {
         const data = await fetch(`${phpEndpoint}/getUsers?page=${page}`);
-        setEntries(await data.json());
+        const jsonData = await data.json();
+        setEntries(jsonData);
+        onLoad(jsonData.length);
       })(),
     [page]
   );
