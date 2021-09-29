@@ -73,7 +73,7 @@ export function UserForm({ initialUser, path }: UserFormProps) {
       </div>
       <div className="m-2">
         <label htmlFor="form-lastName" className="form-label">
-          First Name
+          Last Name
         </label>
         <input
           id="form-lastName"
@@ -87,7 +87,7 @@ export function UserForm({ initialUser, path }: UserFormProps) {
       </div>
       <div className="m-2">
         <label htmlFor="form-date" className="form-label">
-          First Name
+          Date of Birth
         </label>
         <input
           id="form-date"
