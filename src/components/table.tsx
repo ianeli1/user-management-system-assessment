@@ -30,7 +30,7 @@ export function UserTable({}: UserTableProps) {
   useEffect(
     () =>
       void (async () => {
-        const data = await fetch(`${phpEndpoint}/getUsers`);
+        const data = await fetch(`${phpEndpoint}/getUsers?page=${page}`);
         setEntries(await data.json());
       })(),
     [page]
