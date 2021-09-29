@@ -18,3 +18,8 @@ The endpoint for the PHP can be configured in `src/config.json`
 On a server with Apache set up:
 `yarn build` will allow CRA to output an optimized `build` folder, the contents can then be placed in `/var/www/html`.
 Copying the contents of `/server` into `/var/www/html` will automatically route calls meant for the API to PHP using `.htaccess`.
+
+### Setting up using containers
+
+Using docker-compose, we could set up a containerized environment that automatically builds, deploys and hosts this project.
+Note: not currently working and only added as an example
