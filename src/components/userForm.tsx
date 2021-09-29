@@ -11,29 +11,6 @@ export interface UserFormProps {
 }
 
 export function UserForm({ initialUser, path }: UserFormProps) {
-  const [user, setUser] = useState<User>(
-    initialUser ?? {
-      firstName: "",
-      lastName: "",
-      dateOfBirth: "",
-    }
-  );
-
-  const [checkError, setCheckError] = useState(false);
-
-  const { editId } = useParams<RouterParams>();
-
-  useEffect(() => {
-    if (editId) {
-      setUser((u) => ({ ...u, id: editId }));
-    }
-  }, [editId]);
-
-  const allValid =
-    user.firstName.length && user.lastName.length && user.dateOfBirth;
-
-  const { replace } = useHistory();
-
   async function onSubmit() {
     setCheckError(true);
     if (allValid) {
@@ -61,6 +38,29 @@ export function UserForm({ initialUser, path }: UserFormProps) {
       replace("/");
     }
   }
+
+  const [user, setUser] = useState<User>(
+    initialUser ?? {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+    }
+  );
+
+  const [checkError, setCheckError] = useState(false);
+
+  const { editId } = useParams<RouterParams>();
+
+  useEffect(() => {
+    if (editId) {
+      setUser((u) => ({ ...u, id: editId }));
+    }
+  }, [editId]);
+
+  const allValid =
+    user.firstName.length && user.lastName.length && user.dateOfBirth;
+
+  const { replace } = useHistory();
 
   return (
     <form className="col-lg-6 m-auto">
