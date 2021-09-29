@@ -53,6 +53,15 @@ export function UserForm({ initialUser, path }: UserFormProps) {
     }
   }
 
+  async function onDelete() {
+    const req = await formRequest(`${phpEndpoint}/deleteUser`, {
+      id: editId,
+    });
+    if (req.ok) {
+      replace("/");
+    }
+  }
+
   return (
     <form className="col-lg-6 m-auto">
       <div className="m-2">
@@ -103,14 +112,19 @@ export function UserForm({ initialUser, path }: UserFormProps) {
       </div>
       <div className="d-flex">
         <Button
-          color={allValid ? undefined : "btn-secondary"}
+          color={allValid ? "btn-success" : "btn-secondary"}
           onClick={onSubmit}
         >
-          Save
+          Add
         </Button>
-        <Button onClick={() => replace("/")} color="btn-danger">
+        <Button onClick={() => replace("/")} color="btn-primary">
           Cancel
         </Button>
+        {path === "/updateUser" && (
+          <Button onClick={onDelete} color="btn-danger">
+            Delete
+          </Button>
+        )}
       </div>
     </form>
   );
