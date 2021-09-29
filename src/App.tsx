@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Nav } from "./components/navigator";
 import { UserTable } from "./components/table";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useHistory } from "react-router";
 import { UserForm } from "./components/userForm";
 import { User } from "./types";
 
 function App() {
   const [userEditing, setUserEditing] = useState<User>();
+  const { replace } = useHistory();
+
+  function onUserEdit(user: User) {
+    setUserEditing(user);
+    replace(`/edit/${user.id}`);
+  }
 
   return (
     <div className="">
@@ -20,10 +26,7 @@ function App() {
             <UserForm path="/addUser" />
           </Route>
           <Route path={["/:page", "/"]}>
-            <UserTable
-              onDelete={(x) => console.log(x)}
-              onEdit={(x) => console.log(x)}
-            />
+            <UserTable onEdit={onUserEdit} />
           </Route>
         </Switch>
       </div>

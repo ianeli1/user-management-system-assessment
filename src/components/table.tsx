@@ -5,16 +5,15 @@ import { RouterParams, User } from "../types";
 import { Button } from "./button";
 import { ReactComponent as PencilSvg } from "../svg/pencil.svg";
 import { ReactComponent as TrashSvg } from "../svg/trash.svg";
-import { Link } from "react-router-dom";
 import { formRequest } from "../utils";
 
 interface UserTableProps {
-  onDelete: (id: string) => void;
-  onEdit: (id: string) => void;
+  onEdit: (user: User) => void;
 }
 
-export function UserTable({}: UserTableProps) {
-  function TableEntry({ id, firstName, lastName, dateOfBirth }: User) {
+export function UserTable({ onEdit }: UserTableProps) {
+  function TableEntry(user: User) {
+    const { id, firstName, lastName, dateOfBirth } = user;
     return (
       <tr>
         <th scope="row" className="col-sm-1 text-center">
@@ -24,11 +23,9 @@ export function UserTable({}: UserTableProps) {
         <td>{lastName}</td>
         <td className="col-sm-1">{dateOfBirth}</td>
         <td className="col-sm-1">
-          <Link to={`/edit/${id}`}>
-            <Button>
-              <PencilSvg />
-            </Button>
-          </Link>
+          <Button onClick={() => onEdit(user)}>
+            <PencilSvg />
+          </Button>
         </td>
         <td className="col-sm-1">
           <Button onClick={() => id && removeEntry(id)}>
