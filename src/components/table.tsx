@@ -12,6 +12,16 @@ interface UserTableProps {
 }
 
 export function UserTable({ onEdit }: UserTableProps) {
+  function dateToAge(date: string) {
+    const currentTime = new Date();
+    const thenTime = new Date(date);
+    const years =
+      currentTime.getFullYear() -
+      thenTime.getFullYear() -
+      +(currentTime.getMonth() < thenTime.getMonth());
+    return years;
+  }
+
   function TableEntry(user: User) {
     const { id, firstName, lastName, dateOfBirth } = user;
     return (
@@ -21,7 +31,7 @@ export function UserTable({ onEdit }: UserTableProps) {
         </th>
         <td>{firstName}</td>
         <td>{lastName}</td>
-        <td className="col-sm-1">{dateOfBirth}</td>
+        <td className="col-sm-1">{dateToAge(dateOfBirth)}</td>
         <td className="col-sm-1">
           <Button onClick={() => onEdit(user)}>
             <PencilSvg />
@@ -76,7 +86,7 @@ export function UserTable({ onEdit }: UserTableProps) {
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col" className="col-sm-1">
-              DOB
+              Age
             </th>
             <th scope="col" className="col-sm-1">
               Edit
